@@ -1,5 +1,8 @@
-﻿using Raven.Client;
+﻿using System;
+using Ploeh.AutoFixture.Xunit;
+using Raven.Client;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Academy_RavenDB
 {
@@ -7,13 +10,26 @@ namespace Academy_RavenDB
     {
         private IDocumentStore documentStore;
 
-        [Fact]
-        public void ConnectToRaven()
+        [Theory, AutoData]
+        public void ConnectToRaven(string name)
         {
+            var expected = new User(name);
+
+            var id = Guid.Empty;
+
             using (var session = documentStore.OpenSession())
             {
-                session.Store(new User("Stefan"));
+                session.Store(expected);
                 session.SaveChanges();
+
+                id = expected.Id;
+            }
+
+            using (var session = documentStore.OpenSession())
+            {
+                var actual = session.Load<User>(id);
+
+                Assert.Equal(expected, actual);
             }
         }
 
