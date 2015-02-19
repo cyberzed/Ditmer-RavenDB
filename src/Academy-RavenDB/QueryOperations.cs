@@ -36,7 +36,7 @@ namespace Academy_RavenDB
                 var oldies = (from u in session.Query<User>()
                               where
                                   u.Birthday < cutoff
-                              select u);
+                              select u).ToList();
 
                 Assert.NotEmpty(oldies);
             }
