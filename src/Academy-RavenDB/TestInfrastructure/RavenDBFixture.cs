@@ -3,6 +3,7 @@ using Academy_RavenDB.RavenExtensions;
 using Raven.Client;
 using Raven.Client.Embedded;
 using Raven.Client.Indexes;
+using Raven.Database.Server;
 
 namespace Academy_RavenDB.TestInfrastructure
 {
@@ -12,6 +13,7 @@ namespace Academy_RavenDB.TestInfrastructure
 
         public RavenDBFixture()
         {
+
             documentStore = new EmbeddableDocumentStore
             {
                 RunInMemory = true
