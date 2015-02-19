@@ -1,10 +1,10 @@
-﻿using System;
+using System;
+using Academy_RavenDB.RavenExtensions;
 using Raven.Client;
-using Raven.Client.Document;
 using Raven.Client.Embedded;
 using Raven.Client.Indexes;
 
-namespace Academy_RavenDB
+namespace Academy_RavenDB.TestInfrastructure
 {
     public class RavenDBFixture : IDisposable
     {
@@ -17,11 +17,11 @@ namespace Academy_RavenDB
                 RunInMemory = true
             };
 
-            documentStore.Conventions.DefaultQueryingConsistency = ConsistencyOptions.AlwaysWaitForNonStaleResultsAsOfLastWrite;
-
             //documentStore = new DocumentStore { ConnectionStringName = "RavenDB-Local" };
 
             documentStore.Initialize();
+
+            documentStore.Listeners.RegisterListener(new NonStateQueryListener());
 
             IndexCreation.CreateIndexes(typeof (RavenDBFixture).Assembly, documentStore);
         }

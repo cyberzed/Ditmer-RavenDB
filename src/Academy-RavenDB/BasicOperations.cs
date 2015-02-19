@@ -1,4 +1,6 @@
 ﻿using System;
+using Academy_RavenDB.Models;
+using Academy_RavenDB.TestInfrastructure;
 using Ploeh.AutoFixture.Xunit;
 using Raven.Client;
 using Xunit;
@@ -29,7 +31,7 @@ namespace Academy_RavenDB
             {
                 var actual = session.Load<User>(id);
 
-                Assert.Equal(expected, actual);
+                Assert.Equal(expected, actual, new UserEqualityComparer());
             }
         }
 

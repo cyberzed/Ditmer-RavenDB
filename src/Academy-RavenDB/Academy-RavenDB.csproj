@@ -59,10 +59,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BasicOperations.cs" />
+    <Compile Include="NonStateQueryListener.cs" />
+    <Compile Include="Product.cs" />
+    <Compile Include="ProductAveragePriceIndex.cs" />
+    <Compile Include="ProductCountIndex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryOperations.cs" />
     <Compile Include="RavenDBFixture.cs" />
+    <Compile Include="Reduce.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserEqualityComparer.cs" />
     <Compile Include="UserNameIndex.cs" />
   </ItemGroup>
   <ItemGroup>

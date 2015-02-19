@@ -1,8 +1,9 @@
 using System.Linq;
+using Academy_RavenDB.Models;
 using Raven.Abstractions.Indexing;
 using Raven.Client.Indexes;
 
-namespace Academy_RavenDB
+namespace Academy_RavenDB.Indexes
 {
     public class UserNameIndex : AbstractIndexCreationTask<User>
     {
