@@ -13,6 +13,8 @@ namespace Academy_RavenDB.Indexes
                           select new {d.Name};
 
             Indexes.Add(d => d.Name, FieldIndexing.Analyzed);
+
+            Suggestion(u => u.Name, new SuggestionOptions{Accuracy = 0.3f});
         }
     }
 }
