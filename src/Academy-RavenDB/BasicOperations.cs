@@ -11,9 +11,9 @@ namespace Academy_RavenDB
         private IDocumentStore documentStore;
 
         [Theory, AutoData]
-        public void ConnectToRaven(string name)
+        public void InsertAndLoad(string name, DateTime birthday)
         {
-            var expected = new User(name);
+            var expected = new User(name, birthday);
 
             var id = Guid.Empty;
 

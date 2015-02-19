@@ -1,6 +1,8 @@
 ﻿using System;
 using Raven.Client;
 using Raven.Client.Document;
+using Raven.Client.Embedded;
+using Raven.Client.Indexes;
 
 namespace Academy_RavenDB
 {
@@ -10,9 +12,18 @@ namespace Academy_RavenDB
 
         public RavenDBFixture()
         {
-            documentStore = new DocumentStore {ConnectionStringName = "RavenDB-Local"};
+            documentStore = new EmbeddableDocumentStore
+            {
+                RunInMemory = true
+            };
+
+            documentStore.Conventions.DefaultQueryingConsistency = ConsistencyOptions.AlwaysWaitForNonStaleResultsAsOfLastWrite;
+
+            //documentStore = new DocumentStore { ConnectionStringName = "RavenDB-Local" };
 
             documentStore.Initialize();
+
+            IndexCreation.CreateIndexes(typeof (RavenDBFixture).Assembly, documentStore);
         }
 
         public IDocumentStore DocumentStore
