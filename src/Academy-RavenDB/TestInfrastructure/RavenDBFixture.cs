@@ -1,6 +1,7 @@
 using System;
 using Academy_RavenDB.RavenExtensions;
 using Raven.Client;
+using Raven.Client.Document;
 using Raven.Client.Embedded;
 using Raven.Client.Indexes;
 

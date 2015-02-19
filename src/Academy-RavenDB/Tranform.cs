@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Academy_RavenDB.Indexes;
 using Academy_RavenDB.Models;
 using Academy_RavenDB.TestInfrastructure;
+using Academy_RavenDB.Transforms;
 using Ploeh.AutoFixture.Xunit;
 using Raven.Abstractions.Extensions;
 using Raven.Client;
@@ -11,7 +11,7 @@ using Xunit.Extensions;
 
 namespace Academy_RavenDB
 {
-    public class Reduce : IUseFixture<RavenDBFixture>
+    public class Tranform : IUseFixture<RavenDBFixture>
     {
         private IDocumentStore documentStore;
 
@@ -26,30 +26,12 @@ namespace Academy_RavenDB
 
             using (var session = documentStore.OpenSession())
             {
-                var productCount = session
-                    .Query<ProductCountIndex.ProductCountResult, ProductCountIndex>()
+                var pricetags = session
+                    .Query<Product>()
+                    .TransformWith<PriceTagTransform, PriceTagTransform.PriceTagResult>()
                     .ToList();
 
-                Assert.NotEmpty(productCount);
-            }
-        }
-
-        [Theory, AutoData]
-        public void AveragePrice(List<Product> products)
-        {
-            using (var session = documentStore.OpenSession())
-            {
-                products.ForEach(session.Store);
-                session.SaveChanges();
-            }
-
-            using (var session = documentStore.OpenSession())
-            {
-                var averagePrices = session
-                    .Query<ProductAveragePriceIndex.ProductAverageResult, ProductAveragePriceIndex>()
-                    .ToList();
-
-                Assert.NotEmpty(averagePrices);
+                Assert.NotEmpty(pricetags);
             }
         }
 

@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.40121.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academy-RavenDB", "Academy-RavenDB\Academy-RavenDB.csproj", "{E1D160E8-0D46-4BB2-9D29-21C3A721B000}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{87CDED0C-C760-401A-B242-8F2EFAA3452C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
